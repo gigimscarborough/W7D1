@@ -1,9 +1,15 @@
+<%#These first two lines are turnaries that change the action and method%>
+<%# depending on whether you've been directed here from new %>
+
+
+
 <% action = (cat.persisted? ? cat_url(cat) : cats_url) %>
 <% method = (cat.persisted? ? :patch : :post) %>
 
 <form action="<%= action %>" method="post">
   <input type="hidden" name="_method" value="<%= method %>">
 
+<%# Creates text field for cats name %>
   <label for="cat_name">Name</label>
   <input
     type="text"
@@ -11,6 +17,8 @@
     id="cat_name"
     value="<%= cat.name %>">
 
+
+<%# Creates text field for cats details %>
   <label for="cat_birth_date">Birth date</label>
   <input
     type="date"
@@ -19,6 +27,7 @@
     value="<%= cat.birth_date %>">
   <br>
 
+<%# Creates dropdown menu for cats color%>
   <label for="cat_color">Color</label>
   <select name="cat[color]" id="cat_color">
   <option disabled selected>-- select a color --</option>
@@ -32,6 +41,7 @@
   </select>
   <br>
 
+<%# Create radio button for Male option%>
   <input
     type="radio"
     name="cat[sex]"
@@ -39,6 +49,8 @@
     id="cat_sex_male"
     <%= cat.sex == "M" ? "checked" : "" %>>
   <label for="cat_sex_male">Male</label>
+
+  <%# Create radio button for Female option%>
   <input
     type="radio"
     name="cat[sex]"
@@ -48,11 +60,15 @@
   <label for="cat_sex_female">Female</label>
   <br>
 
+
+<%# Creates textarea for cats description%>
   <label>
     Description
     <textarea name="cat[description]"><%= cat.description %></textarea>
   </label>
 
+
+<%# Creates Cat submit button%>
   <% submit_text = (cat.persisted? ? 'Update' : 'Create') + ' cat!' %>
   <input type="submit" value="<%= submit_text %>">
 </form>
